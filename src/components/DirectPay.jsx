@@ -230,10 +230,10 @@ export default function DirectPay({ currentUser, currentBalance, updateBalance }
               <tbody>
                 {paymentHistory.map(pay => (
                   <tr key={pay.id}>
-                    <td style={{ fontWeight: '700' }}>{pay.id}</td>
-                    <td>{pay.date}</td>
-                    <td>{pay.desc}</td>
-                    <td>{pay.type}</td>
+                    <td style={{ fontWeight: '700' }}>{pay.payment_ref || pay.id}</td>
+                    <td>{pay.date || (pay.created_at ? new Date(pay.created_at).toLocaleDateString('tr-TR') : '')}</td>
+                    <td>{pay.desc || pay.description}</td>
+                    <td>{pay.type || pay.payment_type}</td>
                     <td style={{ fontWeight: '600' }}>{pay.amount.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}</td>
                     <td><span className="badge success"><CheckCircle size={12} /> {pay.status}</span></td>
                   </tr>

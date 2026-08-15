@@ -104,12 +104,16 @@ export default function DashboardHome({ orders, setActiveTab, setSelectedOrder, 
             </h2>
             <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', fontSize: '13px', color: '#cbd5e1' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Building size={14} /> {currentUser.companyName || 'Bireysel Cari'}
+                <Building size={14} /> {currentUser.company_name || 'Bireysel Cari'}
               </span>
-              <span>•</span>
-              <span>Vergi Dairesi: {currentUser.taxOffice || 'Bornova V.D.'}</span>
-              <span>•</span>
-              <span>Vergi No: {currentUser.taxNumber || '0000000000'}</span>
+              {(currentUser.tax_office || currentUser.tax_number) && (
+                <>
+                  <span>•</span>
+                  <span>Vergi Dairesi: {currentUser.tax_office || '-'}</span>
+                  <span>•</span>
+                  <span>Vergi No: {currentUser.tax_number || '-'}</span>
+                </>
+              )}
             </div>
           </div>
 
@@ -205,14 +209,14 @@ export default function DashboardHome({ orders, setActiveTab, setSelectedOrder, 
               <tbody>
                 {orders.slice(0, 5).map((order) => (
                   <tr key={order.id}>
-                    <td style={{ fontWeight: '700' }}>{order.id}</td>
+                    <td style={{ fontWeight: '700' }}>{order.order_no || order.id}</td>
                     <td>
                       <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <span style={{ fontWeight: '600' }}>{order.productName}</span>
+                        <span style={{ fontWeight: '600' }}>{order.productName || order.product_name}</span>
                         <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{order.qty} Adet</span>
                       </div>
                     </td>
-                    <td>{order.date}</td>
+                    <td>{order.date || (order.created_at ? new Date(order.created_at).toLocaleDateString('tr-TR') : '')}</td>
                     <td style={{ fontWeight: '600' }}>{order.total.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}</td>
                     <td>{getStatusBadge(order.status)}</td>
                     <td>

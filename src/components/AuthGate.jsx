@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Lock, User, Shield, AlertCircle, ArrowRight, Printer, Sparkles, Building, Loader } from 'lucide-react';
+import { Mail, Lock, User, Shield, AlertCircle, ArrowRight, Printer, Sparkles, Building, Loader, Phone } from 'lucide-react';
 import { authAPI, setToken } from '../utils/api';
 
 export default function AuthGate({ onLoginSuccess }) {
@@ -8,6 +8,10 @@ export default function AuthGate({ onLoginSuccess }) {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [role, setRole] = useState('Müşteri');
+  const [companyName, setCompanyName] = useState('');
+  const [taxOffice, setTaxOffice] = useState('');
+  const [taxNumber, setTaxNumber] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +25,15 @@ export default function AuthGate({ onLoginSuccess }) {
       if (isLogin) {
         result = await authAPI.login(email, password);
       } else {
-        result = await authAPI.register({ name, email, password, phone: phone || undefined });
+        result = await authAPI.register({ 
+          name, 
+          email, 
+          password, 
+          phone: phone || undefined,
+          company_name: companyName || undefined,
+          tax_office: taxOffice || undefined,
+          tax_number: taxNumber || undefined
+        });
       }
 
       // JWT token'ı kaydet
@@ -243,6 +255,60 @@ export default function AuthGate({ onLoginSuccess }) {
 
 
 
+                <div className="form-group">
+                  <label className="form-label">Telefon Numarası</label>
+                  <div style={{ position: 'relative' }}>
+                    <Phone size={16} style={{ position: 'absolute', left: '12px', top: '13px', color: '#94a3b8' }} />
+                    <input 
+                      type="text" 
+                      className="form-input" 
+                      placeholder="Örn: 0532 999 88 77" 
+                      style={{ paddingLeft: '38px', borderRadius: '8px' }}
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Firma Ünvanı (Fatura için)</label>
+                  <div style={{ position: 'relative' }}>
+                    <Building size={16} style={{ position: 'absolute', left: '12px', top: '13px', color: '#94a3b8' }} />
+                    <input 
+                      type="text" 
+                      className="form-input" 
+                      placeholder="Örn: Çamdibi Matbaacılık A.Ş." 
+                      style={{ paddingLeft: '38px', borderRadius: '8px' }}
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div className="form-group">
+                    <label className="form-label">Vergi Dairesi</label>
+                    <input 
+                      type="text" 
+                      className="form-input" 
+                      placeholder="Bornova V.D." 
+                      style={{ borderRadius: '8px' }}
+                      value={taxOffice}
+                      onChange={(e) => setTaxOffice(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Vergi Numarası</label>
+                    <input 
+                      type="text" 
+                      className="form-input" 
+                      placeholder="1234567890" 
+                      style={{ borderRadius: '8px' }}
+                      value={taxNumber}
+                      onChange={(e) => setTaxNumber(e.target.value)}
+                    />
+                  </div>
+                </div>
               </>
             )}
 

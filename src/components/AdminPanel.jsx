@@ -19,7 +19,7 @@ import {
   TrendingUp,
   AlertCircle
 } from 'lucide-react';
-import { adminAPI } from '../utils/api';
+import { adminAPI, API_BASE } from '../utils/api';
 
 export default function AdminPanel({ orders, updateOrderStatus, users }) {
   const [activeTab, setActiveTab] = useState('orders');
@@ -296,8 +296,9 @@ export default function AdminPanel({ orders, updateOrderStatus, users }) {
               <thead>
                 <tr>
                   <th>Müşteri Bilgisi</th>
+                  <th>Telefon</th>
                   <th>Cari Bakiye (Borç)</th>
-                  <th>Kurumsal Detaylar</th>
+                  <th>Kurumsal Bilgiler</th>
                   <th>Hesap Tipi</th>
                   <th>Kayıt Tarihi</th>
                 </tr>
@@ -308,7 +309,7 @@ export default function AdminPanel({ orders, updateOrderStatus, users }) {
                     <td>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                         <div className="user-avatar" style={{ width: '38px', height: '38px', fontSize: '13px' }}>
-                          {usr.name.substring(0,2).toUpperCase()}
+                          {usr.name ? usr.name.substring(0,2).toUpperCase() : '??'}
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                           <span style={{ fontWeight: '600' }}>{usr.name}</span>
@@ -316,14 +317,23 @@ export default function AdminPanel({ orders, updateOrderStatus, users }) {
                         </div>
                       </div>
                     </td>
+                    <td>
+                      <span style={{ fontSize: '12px' }}>{usr.phone || '-'}</span>
+                    </td>
                     <td style={{ fontWeight: '700', color: (usr.balance || 0) > 0 ? 'var(--danger)' : 'var(--success)' }}>
                       {(usr.balance || 0).toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}
                     </td>
                     <td>
-                      <div style={{ display: 'flex', flexDirection: 'column', fontSize: '12px' }}>
-                        <span><strong>{usr.companyName || '-'}</strong></span>
-                        <span style={{ color: 'var(--text-muted)' }}>{usr.taxOffice} - No: {usr.taxNumber}</span>
-                      </div>
+                      {usr.company_name ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', fontSize: '12px' }}>
+                          <span style={{ fontWeight: '600' }}>{usr.company_name}</span>
+                          <span style={{ color: 'var(--text-muted)', fontSize: '11px' }}>
+                            {usr.tax_office || '-'} / No: {usr.tax_number || '-'}
+                          </span>
+                        </div>
+                      ) : (
+                        <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Bireysel Cari</span>
+                      )}
                     </td>
                     <td>
                       <span className={`badge ${usr.role === 'Yönetici' ? 'danger' : 'info'}`}>
@@ -331,7 +341,7 @@ export default function AdminPanel({ orders, updateOrderStatus, users }) {
                       </span>
                     </td>
                     <td style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
-                      {usr.createdAt || '14 Ağustos 2026'}
+                      {usr.created_at ? new Date(usr.created_at).toLocaleDateString('tr-TR') : '14 Ağustos 2026'}
                     </td>
                   </tr>
                 ))}
@@ -446,7 +456,7 @@ export default function AdminPanel({ orders, updateOrderStatus, users }) {
                     <span style={{ fontSize: '13px', fontWeight: '600' }}>{selectedAdminOrder.fileName || 'Dosya Yüklenmemiş'}</span>
                   </div>
                   {selectedAdminOrder.fileName && (
-                    <button className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }} onClick={() => alert(`Dosya indiriliyor: ${selectedAdminOrder.fileName}`)}>
+                    <button className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }} onClick={() => window.open(`${API_BASE}/uploads/${selectedAdminOrder.fileName}`, '_blank')}>
                       İndir <ExternalLink size={12} />
                     </button>
                   )}

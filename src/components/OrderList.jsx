@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Eye, Download, X, Layers, Printer, FileText, Calendar, DollarSign, Award, Clock, Upload, Loader, Lock } from 'lucide-react';
-import { ordersAPI } from '../utils/api';
+import { ordersAPI, API_BASE } from '../utils/api';
 import PaymentForm from './PaymentForm';
 
 export default function OrderList({ orders, selectedOrder, setSelectedOrder, refreshOrders }) {
@@ -221,7 +221,7 @@ export default function OrderList({ orders, selectedOrder, setSelectedOrder, ref
                       <div className="summary-row" style={{ fontSize: '13px' }}>
                         <span>Yüklenen Dosya:</span>
                         <strong style={{ maxWidth: '280px', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                          <a href={`http://localhost:8000/uploads/${selectedOrder.fileName || selectedOrder.file_name}`} target="_blank" rel="noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>
+                          <a href={`${API_BASE}/uploads/${selectedOrder.fileName || selectedOrder.file_name}`} target="_blank" rel="noreferrer" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>
                             {selectedOrder.fileName || selectedOrder.file_name}
                           </a>
                         </strong>

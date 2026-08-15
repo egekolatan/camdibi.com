@@ -3,7 +3,9 @@
  * localStorage yerine FastAPI backend ile iletişim kurar.
  */
 
-const API_BASE = "http://localhost:8000";
+export const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+  ? "http://localhost:8000"
+  : "";
 
 // ─── Token Yönetimi ──────────────────────────────────────────────────────────
 

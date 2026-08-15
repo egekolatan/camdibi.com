@@ -8,7 +8,7 @@ export default function AuthGate({ onLoginSuccess }) {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [role, setRole] = useState('Müşteri');
+  const [isCorporate, setIsCorporate] = useState(false);
   const [companyName, setCompanyName] = useState('');
   const [taxOffice, setTaxOffice] = useState('');
   const [taxNumber, setTaxNumber] = useState('');
@@ -30,9 +30,9 @@ export default function AuthGate({ onLoginSuccess }) {
           email, 
           password, 
           phone: phone || undefined,
-          company_name: companyName || undefined,
-          tax_office: taxOffice || undefined,
-          tax_number: taxNumber || undefined
+          company_name: isCorporate ? (companyName || undefined) : undefined,
+          tax_office: isCorporate ? (taxOffice || undefined) : undefined,
+          tax_number: isCorporate ? (taxNumber || undefined) : undefined
         });
       }
 
@@ -270,45 +270,92 @@ export default function AuthGate({ onLoginSuccess }) {
                   </div>
                 </div>
 
-                <div className="form-group">
-                  <label className="form-label">Firma Ünvanı (Fatura için)</label>
-                  <div style={{ position: 'relative' }}>
-                    <Building size={16} style={{ position: 'absolute', left: '12px', top: '13px', color: '#94a3b8' }} />
-                    <input 
-                      type="text" 
-                      className="form-input" 
-                      placeholder="Örn: Çamdibi Matbaacılık A.Ş." 
-                      style={{ paddingLeft: '38px', borderRadius: '8px' }}
-                      value={companyName}
-                      onChange={(e) => setCompanyName(e.target.value)}
-                    />
+                <div className="form-group" style={{ marginBottom: '8px' }}>
+                  <label className="form-label">Hesap Türü</label>
+                  <div style={{ display: 'flex', gap: '12px' }}>
+                    <label style={{ 
+                      flex: 1, 
+                      padding: '12px', 
+                      border: `1.5px solid ${!isCorporate ? '#000000' : '#e2e8f0'}`, 
+                      borderRadius: '8px', 
+                      cursor: 'pointer', 
+                      display: 'flex', 
+                      gap: '8px', 
+                      alignItems: 'center', 
+                      backgroundColor: !isCorporate ? '#f8fafc' : 'transparent', 
+                      fontSize: '13px', 
+                      fontWeight: '600',
+                      transition: 'all 0.15s ease'
+                    }}>
+                      <input type="radio" name="accountType" checked={!isCorporate} onChange={() => setIsCorporate(false)} style={{ accentColor: '#000000' }} />
+                      Bireysel Üyelik
+                    </label>
+                    <label style={{ 
+                      flex: 1, 
+                      padding: '12px', 
+                      border: `1.5px solid ${isCorporate ? '#000000' : '#e2e8f0'}`, 
+                      borderRadius: '8px', 
+                      cursor: 'pointer', 
+                      display: 'flex', 
+                      gap: '8px', 
+                      alignItems: 'center', 
+                      backgroundColor: isCorporate ? '#f8fafc' : 'transparent', 
+                      fontSize: '13px', 
+                      fontWeight: '600',
+                      transition: 'all 0.15s ease'
+                    }}>
+                      <input type="radio" name="accountType" checked={isCorporate} onChange={() => setIsCorporate(true)} style={{ accentColor: '#000000' }} />
+                      Kurumsal Üyelik
+                    </label>
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                  <div className="form-group">
-                    <label className="form-label">Vergi Dairesi</label>
-                    <input 
-                      type="text" 
-                      className="form-input" 
-                      placeholder="Bornova V.D." 
-                      style={{ borderRadius: '8px' }}
-                      value={taxOffice}
-                      onChange={(e) => setTaxOffice(e.target.value)}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">Vergi Numarası</label>
-                    <input 
-                      type="text" 
-                      className="form-input" 
-                      placeholder="1234567890" 
-                      style={{ borderRadius: '8px' }}
-                      value={taxNumber}
-                      onChange={(e) => setTaxNumber(e.target.value)}
-                    />
-                  </div>
-                </div>
+                {isCorporate && (
+                  <>
+                    <div className="form-group">
+                      <label className="form-label">Firma Ünvanı (Fatura için)</label>
+                      <div style={{ position: 'relative' }}>
+                        <Building size={16} style={{ position: 'absolute', left: '12px', top: '13px', color: '#94a3b8' }} />
+                        <input 
+                          type="text" 
+                          className="form-input" 
+                          placeholder="Örn: Çamdibi Matbaacılık A.Ş." 
+                          required={isCorporate}
+                          style={{ paddingLeft: '38px', borderRadius: '8px' }}
+                          value={companyName}
+                          onChange={(e) => setCompanyName(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                      <div className="form-group">
+                        <label className="form-label">Vergi Dairesi</label>
+                        <input 
+                          type="text" 
+                          className="form-input" 
+                          placeholder="Bornova V.D." 
+                          required={isCorporate}
+                          style={{ borderRadius: '8px' }}
+                          value={taxOffice}
+                          onChange={(e) => setTaxOffice(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label">Vergi Numarası</label>
+                        <input 
+                          type="text" 
+                          className="form-input" 
+                          placeholder="1234567890" 
+                          required={isCorporate}
+                          style={{ borderRadius: '8px' }}
+                          value={taxNumber}
+                          onChange={(e) => setTaxNumber(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
               </>
             )}
 
@@ -344,47 +391,7 @@ export default function AuthGate({ onLoginSuccess }) {
               </div>
             </div>
 
-            {!isLogin && (
-              <div className="form-group" style={{ marginBottom: '8px' }}>
-                <label className="form-label">Üyelik Tipi</label>
-                <div style={{ display: 'flex', gap: '12px' }}>
-                  <label style={{ 
-                    flex: 1, 
-                    padding: '12px', 
-                    border: `1.5px solid ${role === 'Müşteri' ? '#000000' : '#e2e8f0'}`, 
-                    borderRadius: '8px', 
-                    cursor: 'pointer', 
-                    display: 'flex', 
-                    gap: '8px', 
-                    alignItems: 'center', 
-                    backgroundColor: role === 'Müşteri' ? '#f8fafc' : 'transparent', 
-                    fontSize: '13px', 
-                    fontWeight: '600',
-                    transition: 'all 0.15s ease'
-                  }}>
-                    <input type="radio" checked={role === 'Müşteri'} onChange={() => setRole('Müşteri')} style={{ accentColor: '#000000' }} />
-                    Müşteri Üyeliği
-                  </label>
-                  <label style={{ 
-                    flex: 1, 
-                    padding: '12px', 
-                    border: `1.5px solid ${role === 'Yönetici' ? '#000000' : '#e2e8f0'}`, 
-                    borderRadius: '8px', 
-                    cursor: 'pointer', 
-                    display: 'flex', 
-                    gap: '8px', 
-                    alignItems: 'center', 
-                    backgroundColor: role === 'Yönetici' ? '#f8fafc' : 'transparent', 
-                    fontSize: '13px', 
-                    fontWeight: '600',
-                    transition: 'all 0.15s ease'
-                  }}>
-                    <input type="radio" checked={role === 'Yönetici'} onChange={() => setRole('Yönetici')} style={{ accentColor: '#000000' }} />
-                    Yönetici Yetkisi
-                  </label>
-                </div>
-              </div>
-            )}
+
 
             <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%', marginTop: '12px', padding: '14px', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', fontSize: '14px' }}>
               {loading ? (

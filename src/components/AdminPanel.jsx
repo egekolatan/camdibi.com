@@ -35,7 +35,7 @@ export default function AdminPanel({ orders, updateOrderStatus, users }) {
   const [selectedAdminOrder, setSelectedAdminOrder] = useState(null);
 
   // Compute aggregated stats
-  const totalSales = orders.reduce((sum, o) => sum + o.total, 0);
+  const totalSales = orders.reduce((sum, o) => sum + (o.total || 0), 0);
   const totalOrders = orders.length;
   const printingCount = orders.filter(o => o.status === 'Baskıda').length;
   const deliveryCount = orders.filter(o => o.status === 'Kargoda').length;
@@ -363,10 +363,10 @@ export default function AdminPanel({ orders, updateOrderStatus, users }) {
                   </div>
                   <div>
                     <div style={{ fontWeight: '700', fontSize: '14px' }}>{msg.name}</div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{msg.email} • {msg.date}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{msg.email} • {msg.created_at ? new Date(msg.created_at).toLocaleDateString('tr-TR') : '-'}</div>
                   </div>
                 </div>
-                <span className="badge warning">Talep Açık</span>
+                <span className={`badge ${msg.status === 'Kapalı' ? 'success' : msg.status === 'İnceleniyor' ? 'info' : 'warning'}`}>{msg.status || 'Açık'}</span>
               </div>
               <div className="modal-body" style={{ padding: '20px' }}>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--text-main)', whiteSpace: 'pre-line', marginBottom: '20px' }}>
@@ -421,15 +421,15 @@ export default function AdminPanel({ orders, updateOrderStatus, users }) {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                 <div>
                   <h4 style={{ fontSize: '13px', fontWeight: '700', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}><User size={14} /> Müşteri Bilgileri</h4>
-                  <p style={{ fontSize: '13px', fontWeight: '600' }}>{selectedAdminOrder.shippingName}</p>
-                  <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{selectedAdminOrder.userEmail}</p>
-                  <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>Ödeme Yöntemi: <strong>{selectedAdminOrder.paymentMethod === 'card' ? 'Kredi Kartı' : 'Havale / EFT'}</strong></p>
+                  <p style={{ fontSize: '13px', fontWeight: '600' }}>{selectedAdminOrder.shipping_name || selectedAdminOrder.shippingName || 'Müşteri'}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{selectedAdminOrder.user_email || selectedAdminOrder.userEmail}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>Ödeme Yöntemi: <strong>{(selectedAdminOrder.payment_method || selectedAdminOrder.paymentMethod) === 'card' ? 'Kredi Kartı' : 'Havale / EFT'}</strong></p>
                 </div>
                 <div>
                   <h4 style={{ fontSize: '13px', fontWeight: '700', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}><MapPin size={14} /> Teslimat Adresi</h4>
                   <p style={{ fontSize: '12px', lineHeight: '1.5' }}>
-                    {selectedAdminOrder.shippingAddress}<br />
-                    <strong>{selectedAdminOrder.shippingCity}</strong>
+                    {selectedAdminOrder.shipping_address || selectedAdminOrder.shippingAddress}<br />
+                    <strong>{selectedAdminOrder.shipping_city || selectedAdminOrder.shippingCity}</strong>
                   </p>
                 </div>
               </div>
@@ -437,29 +437,29 @@ export default function AdminPanel({ orders, updateOrderStatus, users }) {
               {/* Technical Specifications */}
               <div style={{ border: '1px solid var(--border-color)', borderRadius: '8px', padding: '16px' }}>
                 <h4 style={{ fontSize: '13px', fontWeight: '700', marginBottom: '10px' }}>Teknik Baskı Detayları</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '12px' }}>
-                  <div><span>Ürün:</span> <strong>{selectedAdminOrder.productName}</strong></div>
-                  <div><span>Adet:</span> <strong>{selectedAdminOrder.qty} Adet</strong></div>
-                  <div><span>Kağıt:</span> <strong>{selectedAdminOrder.specs.paper || '-'}</strong></div>
-                  <div><span>Selefon:</span> <strong>{selectedAdminOrder.specs.lamination || '-'}</strong></div>
-                  <div><span>Ebat:</span> <strong>{selectedAdminOrder.specs.size || '-'}</strong></div>
-                  <div><span>Kesim/Cilt:</span> <strong>{selectedAdminOrder.specs.corner || 'Düz Kesim'}</strong></div>
-                </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '12px' }}>
+                    <div><span>Ürün:</span> <strong>{selectedAdminOrder.product_name || selectedAdminOrder.productName}</strong></div>
+                    <div><span>Adet:</span> <strong>{selectedAdminOrder.qty} Adet</strong></div>
+                    <div><span>Kağıt:</span> <strong>{(selectedAdminOrder.specs || {}).paper || '-'}</strong></div>
+                    <div><span>Selefon:</span> <strong>{(selectedAdminOrder.specs || {}).lamination || '-'}</strong></div>
+                    <div><span>Ebat:</span> <strong>{(selectedAdminOrder.specs || {}).size || '-'}</strong></div>
+                    <div><span>Kesim/Cilt:</span> <strong>{(selectedAdminOrder.specs || {}).corner || 'Düz Kesim'}</strong></div>
+                  </div>
               </div>
 
               {/* Uploaded File Detail */}
               <div style={{ border: '1px solid var(--border-color)', borderRadius: '8px', padding: '16px' }}>
                 <h4 style={{ fontSize: '13px', fontWeight: '700', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}><FileText size={15} /> Dosya Ayrıntıları</h4>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    {getFileBadge(selectedAdminOrder.fileName)}
-                    <span style={{ fontSize: '13px', fontWeight: '600' }}>{selectedAdminOrder.fileName || 'Dosya Yüklenmemiş'}</span>
-                  </div>
-                  {selectedAdminOrder.fileName && (
-                    <button className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }} onClick={() => window.open(`${API_BASE}/uploads/${selectedAdminOrder.fileName}`, '_blank')}>
-                      İndir <ExternalLink size={12} />
-                    </button>
-                  )}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      {getFileBadge(selectedAdminOrder.file_name || selectedAdminOrder.fileName)}
+                      <span style={{ fontSize: '13px', fontWeight: '600' }}>{selectedAdminOrder.file_name || selectedAdminOrder.fileName || 'Dosya Yüklenmemiş'}</span>
+                    </div>
+                    {(selectedAdminOrder.file_name || selectedAdminOrder.fileName) && (
+                      <button className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '12px' }} onClick={() => window.open(`${API_BASE}/uploads/${selectedAdminOrder.file_name || selectedAdminOrder.fileName}`, '_blank')}>
+                        İndir <ExternalLink size={12} />
+                      </button>
+                    )}
                 </div>
               </div>
 

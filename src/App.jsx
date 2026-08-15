@@ -184,7 +184,10 @@ function App() {
   // Filter orders: Admins see all orders, customers see only their own orders
   const visibleOrders = currentUser.role === 'Yönetici' 
     ? orders 
-    : orders.filter(o => o.userEmail && o.userEmail.toLowerCase() === currentUser.email.toLowerCase());
+    : orders.filter(o => {
+        const email = o.user_email || o.userEmail || '';
+        return email.toLowerCase() === currentUser.email.toLowerCase();
+      });
 
   const renderContent = () => {
     switch (activeTab) {

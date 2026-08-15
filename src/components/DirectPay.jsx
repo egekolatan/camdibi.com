@@ -5,16 +5,16 @@ import { paymentsAPI } from '../utils/api';
 export default function DirectPay({ currentUser, currentBalance, updateBalance }) {
   const [payAmount, setPayAmount] = useState('');
   const [description, setDescription] = useState('');
-  const [billingTitle, setBillingTitle] = useState(currentUser.name || '');
-  const [taxOffice, setTaxOffice] = useState('Bornova V.D.');
-  const [taxNumber, setTaxNumber] = useState('4829102931');
-  const [phone, setPhone] = useState(currentUser.phone || '0532 999 88 77');
+  const [billingTitle, setBillingTitle] = useState(currentUser?.company_name || currentUser?.name || '');
+  const [taxOffice, setTaxOffice] = useState(currentUser?.tax_office || '');
+  const [taxNumber, setTaxNumber] = useState(currentUser?.tax_number || '');
+  const [phone, setPhone] = useState(currentUser?.phone || '');
 
-  // Credit Card Info
-  const [cardHolder, setCardHolder] = useState(currentUser.name || '');
-  const [cardNumber, setCardNumber] = useState('4355 8899 1122 3456');
-  const [cardExpiry, setCardExpiry] = useState('12/28');
-  const [cardCvv, setCardCvv] = useState('321');
+  // Credit Card Info (clean empty states for security & anonymity)
+  const [cardHolder, setCardHolder] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardExpiry, setCardExpiry] = useState('');
+  const [cardCvv, setCardCvv] = useState('');
 
   // Interactive Payment State
   const [paymentHistory, setPaymentHistory] = useState([]);
@@ -121,6 +121,7 @@ export default function DirectPay({ currentUser, currentBalance, updateBalance }
               <input 
                 type="text" 
                 className="form-input" 
+                placeholder="Örn: Ahmet Yılmaz veya Çamdibi Matbaa A.Ş."
                 required 
                 value={billingTitle} 
                 onChange={(e) => setBillingTitle(e.target.value)}
@@ -134,6 +135,7 @@ export default function DirectPay({ currentUser, currentBalance, updateBalance }
                 <input 
                   type="text" 
                   className="form-input" 
+                  placeholder="Örn: Bornova V.D."
                   value={taxOffice} 
                   onChange={(e) => setTaxOffice(e.target.value)}
                   disabled={isProcessing}
@@ -144,6 +146,7 @@ export default function DirectPay({ currentUser, currentBalance, updateBalance }
                 <input 
                   type="text" 
                   className="form-input" 
+                  placeholder="Örn: 1234567890"
                   value={taxNumber} 
                   onChange={(e) => setTaxNumber(e.target.value)}
                   disabled={isProcessing}
@@ -159,6 +162,7 @@ export default function DirectPay({ currentUser, currentBalance, updateBalance }
               <input 
                 type="text" 
                 className="form-input" 
+                placeholder="Örn: Ahmet Yılmaz"
                 required 
                 value={cardHolder} 
                 onChange={(e) => setCardHolder(e.target.value)}
@@ -172,6 +176,7 @@ export default function DirectPay({ currentUser, currentBalance, updateBalance }
                 <input 
                   type="text" 
                   className="form-input" 
+                  placeholder="4543 •••• •••• ••••"
                   required 
                   value={cardNumber} 
                   onChange={(e) => setCardNumber(e.target.value)}

@@ -65,7 +65,7 @@ const PRICE_DATA = {
     { code: 'BRŞ08', name: 'A3 Broşür (29.5 x 40)', size: '29.5 x 40 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '6.600,00 TL' },
     { code: 'ELTY01', name: 'Tek Yön (Renkli) El İlanı', size: '9.5 x 13.5 cm', paper: 'Kuşe / 115 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '2000', price: '2.000,00 TL' },
     { code: 'ELTY02', name: 'Tek Yön (Renkli) El İlanı', size: '13.5 x 19.5 cm', paper: 'Kuşe / 115 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '2.000,00 TL' },
-    { code: 'ELTY03', name: 'Tek Yön (Renkli) El İlanı', size: '19.5 x 27 cm', paper: 'Kuşe / 115 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '1.150,00 TL' },
+    { code: 'ELTY03', name: 'Tek Yön (Renkli) El İlanı', size: '19.5 x 27 cm', paper: 'Kuşe / 115 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '2.200,00 TL' },
     { code: 'ELTY04', name: 'Tek Yön (Renkli) El İlanı', size: '27 x 39 cm', paper: 'Kuşe / 115 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '2.300,00 TL' },
     { code: 'ELÇY01', name: 'Çift Yön (Renkli) El İlanı (9.5 x 13.5)', size: '9.5 x 13.5 cm', paper: 'Kuşe / 115 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '2000', price: '875,00 TL' },
     { code: 'BRŞ01', name: 'Çift Yön (Renkli) El İlanı (10 x 14)', size: '10 x 14 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '2000', price: '900,00 TL' },

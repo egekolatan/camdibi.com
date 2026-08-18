@@ -55,7 +55,7 @@ const PRICE_DATA = {
     { code: 'BRŞ11', name: 'A4 Broşür (21 x 29.7 - Katlamalı)', size: '21 x 29.7 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Var', qty: '1000', price: '4.500,00 TL' },
     { code: 'BRŞ06', name: 'A4 Broşür (20 x 29.5)', size: '20 x 29.5 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '3.500,00 TL' },
     { code: 'BRŞ07', name: 'A4 Broşür (20 x 29.5 - Katlamalı)', size: '20 x 29.5 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Var', qty: '1000', price: '3.900,00 TL' },
-    { code: 'BRŞ21', name: 'A3 Broşür (29.7 x 42 - Kırımlı)', size: '29.7 x 42 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Mat Selefon', sides: 'Kırım Var', qty: '1000', price: '6.500,00 TL' },
+    { code: 'BRŞ21', name: 'A3 Broşür (29.7 x 42 - Kırımlı)', size: '29.7 x 42 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Mat Selefon', sides: 'Kırım Var', qty: '1000', price: '9.750,00 TL' },
     { code: 'BRŞ20', name: 'A3 Broşür (29.7 x 42)', size: '29.7 x 42 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Mat Selefon', sides: 'Kırım Yok', qty: '1000', price: '5.850,00 TL' },
     { code: 'BRŞ19', name: 'A3 Broşür (29.7 x 42 - Kırımlı)', size: '29.7 x 42 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Parlak Selefon', sides: 'Kırım Var', qty: '1000', price: '6.350,00 TL' },
     { code: 'BRŞ18', name: 'A3 Broşür (29.7 x 42)', size: '29.7 x 42 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Parlak Selefon', sides: 'Kırım Yok', qty: '1000', price: '5.700,00 TL' },

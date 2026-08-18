@@ -41,7 +41,6 @@ const PRICE_DATA = {
     { code: 'ÇÖM', name: 'Kartvizit (Özel Kesimli - Bıçaklı)', size: '5 x 8 cm', paper: 'Kuşe / 350 Gr.', lamination: 'Mat Selefon', sides: 'Çift Yön', qty: '1000', price: '1.700,00 TL' },
     { code: 'ÖKL', name: 'Kartvizit (Çift Taraf Kabartma - Özel Kesimli)', size: '5 x 8 cm', paper: 'Kuşe / 350 Gr.', lamination: 'Mat Selefon', sides: 'Çift Yön', qty: '1000', price: '1.700,00 TL' },
     { code: 'SVMÖ', name: 'Sıvama (Çift Taraf Kabartma Lak - Özel Kesimli)', size: '5 x 8 cm', paper: '300 Gr + 300 Gr / Amerikan Bristol', lamination: 'Mat Selefon', sides: 'Çift Yön', qty: '1000', price: '1.900,00 TL' },
-    { code: 'ÇMK-500', name: 'Çift Yön Kartvizit (Renkli) Mat Selefon 500 Forma', size: '5.2 x 8.2 cm', paper: 'Kuşe / 350 Gr.', lamination: 'Mat Selefon', sides: 'Çift Yön', qty: '1', price: '0,50 TL' },
     { code: 'YAGK', name: 'Yağ Kartı (Arka Tekrenk Siyah Baskılı) 8 x 13.5', size: '8 x 13.5 cm', paper: 'A. Bristol / 270 Gr.', lamination: 'Tek Yön Parlak Selefon', sides: 'Çift Yön', qty: '1000', price: '2.700,00 TL' },
     { code: 'YAGKK', name: 'Yağ Kartı (Arka Tekrenk Siyah Baskılı) 6 x 10', size: '6 x 10 cm', paper: 'A. Bristol / 270 Gr.', lamination: 'Tek Yön Parlak Selefon', sides: 'Çift Yön', qty: '1000', price: '2.500,00 TL' }
   ],

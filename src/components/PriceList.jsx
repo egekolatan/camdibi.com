@@ -61,7 +61,7 @@ const PRICE_DATA = {
     { code: 'BRŞ18', name: 'A3 Broşür (29.7 x 42)', size: '29.7 x 42 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Parlak Selefon', sides: 'Kırım Yok', qty: '1000', price: '9.500,00 TL' },
     { code: 'BRŞ17', name: 'A3 Broşür (29.7 x 42 - Katlamalı)', size: '29.7 x 42 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Var', qty: '1000', price: '7.700,00 TL' },
     { code: 'BRŞ16', name: 'A3 Broşür (29.7 x 42)', size: '29.7 x 42 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '7.150,00 TL' },
-    { code: 'BRŞ09', name: 'A3 Broşür (29.5 x 40 - Katlamalı)', size: '29.5 x 40 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Var', qty: '1000', price: '4.150,00 TL' },
+    { code: 'BRŞ09', name: 'A3 Broşür (29.5 x 40 - Katlamalı)', size: '29.5 x 40 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Var', qty: '1000', price: '7.150,00 TL' },
     { code: 'BRŞ08', name: 'A3 Broşür (29.5 x 40)', size: '29.5 x 40 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '3.600,00 TL' },
     { code: 'ELTY01', name: 'Tek Yön (Renkli) El İlanı', size: '9.5 x 13.5 cm', paper: 'Kuşe / 115 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '2000', price: '575,00 TL' },
     { code: 'ELTY02', name: 'Tek Yön (Renkli) El İlanı', size: '13.5 x 19.5 cm', paper: 'Kuşe / 115 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '575,00 TL' },

@@ -45,8 +45,8 @@ const PRICE_DATA = {
     { code: 'YAGKK', name: 'Yağ Kartı (Arka Tekrenk Siyah Baskılı) 6 x 10', size: '6 x 10 cm', paper: 'A. Bristol / 270 Gr.', lamination: 'Tek Yön Parlak Selefon', sides: 'Çift Yön', qty: '1000', price: '2.500,00 TL' }
   ],
   'el-ilani-brosur': [
-    { code: 'BRŞ04', name: 'Renkli Broşür (19 x 20)', size: '19 x 20 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '1.425,00 TL' },
-    { code: 'BRŞ05', name: 'Renkli Broşür (19 x 20 - Katlamalı)', size: '19 x 20 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Var', qty: '1000', price: '1.975,00 TL' },
+    { code: 'BRŞ04', name: 'Renkli Broşür (19 x 20)', size: '19 x 20 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Yok', qty: '1000', price: '1.200,00 TL' },
+    { code: 'BRŞ05', name: 'Renkli Broşür (19 x 20 - Katlamalı)', size: '19 x 20 cm', paper: 'Kuşe / 150 Gr.', lamination: 'Selefon Yok', sides: 'Kırım Var', qty: '1000', price: '1.200,00 TL' },
     { code: 'BRŞ13', name: 'A4 Broşür (21 x 29.7 - Kırımlı)', size: '21 x 29.7 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Parlak Selefon', sides: 'Kırım Var', qty: '1000', price: '3.800,00 TL' },
     { code: 'BRŞ15', name: 'A4 Broşür (21 x 29.7 - Kırımlı)', size: '21 x 29.7 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Mat Selefon', sides: 'Kırım Var', qty: '1000', price: '3.900,00 TL' },
     { code: 'BRŞ12', name: 'A4 Broşür (21 x 29.7)', size: '21 x 29.7 cm', paper: 'Kuşe / 170 Gr.', lamination: 'Parlak Selefon', sides: 'Kırım Yok', qty: '1000', price: '3.150,00 TL' },
